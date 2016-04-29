@@ -1,0 +1,187 @@
+#!/usr/bin/env zsh
+
+# ZDOTDIR/.zshrc: executed by zsh(1) interactive shells
+
+##
+## ZSH features and options
+##
+
+setopt autocd nomatch notify
+unsetopt beep extendedglob
+setopt appendhistory autocd
+
+# Comments
+setopt interactivecomments
+
+# Mass rename
+autoload zmv
+
+#
+## Autocomplete
+#
+autoload -Uz compinit
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump
+
+# arrow-key driven interface
+zstyle ':completion:*' menu select
+
+# fuzzy-match
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+# ignore on missing
+zstyle ':completion:*:functions' ignored-patterns '_*'
+
+# autocompletion of privileged environments in privileged commands
+zstyle ':completion::complete:*' gain-privileges 1
+
+# autocompletion of command line switches for aliases
+unsetopt complete_aliases
+
+#
+# History
+#
+
+# Mimic bash `history`
+alias history='history -E 1'
+
+# shellcheck disable=SC2154
+export HISTFILE="$XDG_DATA_HOME"/zsh/history
+
+# size
+export HISTSIZE=1048576
+export SAVEHIST=$HISTSIZE
+
+# Add timestamp
+# Set imestamps for later analysis. www.debian-administration.org/users/rossen/weblog/1
+HISTTIMEFORMAT='%F %T '
+# Iignore
+HISTIGNORE='&:ls:cd ~:cd ..:pwd:clear:[bf]g:exit:h:history'
+
+#setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+
+# History search
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+[[ -n "${key[Up]}"   ]] && bindkey -- "${key[Up]}"   up-line-or-beginning-search
+[[ -n "${key[Down]}" ]] && bindkey -- "${key[Down]}" down-line-or-beginning-search
+
+# word movement
+#key[Control-Left]="${terminfo[kLFT5]}"
+#key[Control-Right]="${terminfo[kRIT5]}"
+
+[[ -n "${key[Control-Left]}"  ]] && bindkey -- "${key[Control-Left]}"  backward-word
+[[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word
+
+#
+## Keybindings
+#
+
+# Set Emacs mode
+bindkey -e
+
+# create a zkbd compatible hash;
+# to add other keys to this hash, see: man 5 terminfo
+typeset -g -A key
+
+key[Home]="${terminfo[khome]}"
+key[End]="${terminfo[kend]}"
+key[Insert]="${terminfo[kich1]}"
+key[Backspace]="${terminfo[kbs]}"
+key[Delete]="${terminfo[kdch1]}"
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+key[Left]="${terminfo[kcub1]}"
+key[Right]="${terminfo[kcuf1]}"
+key[PageUp]="${terminfo[kpp]}"
+key[PageDown]="${terminfo[knp]}"
+key[Shift-Tab]="${terminfo[kcbt]}"
+
+# setup key accordingly
+[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"      beginning-of-line
+[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"       end-of-line
+[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"    overwrite-mode
+[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}" backward-delete-char
+[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"    delete-char
+[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"        up-line-or-history
+[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"      down-line-or-history
+[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"      backward-char
+[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"     forward-char
+[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"    beginning-of-buffer-or-history
+[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"  end-of-buffer-or-history
+[[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}" reverse-menu-complete
+
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+	autoload -Uz add-zle-hook-widget
+	function zle_application_mode_start { echoti smkx }
+	function zle_application_mode_stop { echoti rmkx }
+	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+fi
+
+{{ if eq .chezmoi.os "darwin" }}
+##
+## Load ZSH Darwin-specific settings
+##
+
+# Colorize ls
+export CLICOLOR=1
+export CLICOLOR_FORCE=1 # Always show colors (with less and grep), Experimental
+
+# Load iTerm2 ZSH script
+test -e "$XDG_CONFIG_HOME/iterm2/iterm2_shell_integration.zsh" && source "$XDG_CONFIG_HOME/iterm2/iterm2_shell_integration.zsh"
+
+# Prefix PATH with MacPorts binaries
+test -d '/opt/local/sbin' && export PATH="/opt/local/sbin:$PATH"
+test -d '/opt/local/bin'  && export PATH="/opt/local/bin:$PATH"
+
+# Prefix PATH with HomeBrew binaries
+test -d '/opt/homebrew/sbin' && export PATH="/opt/homebrew/sbin:$PATH"
+test -d '/opt/homebrew/bin'  && export PATH="/opt/homebrew/bin:$PATH"
+
+# Prefix PATH with GNU coreutils
+test -d '/opt/homebrew/opt/coreutils/libexec/gnubin' && export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+
+# ZSH function path
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+{{ end }}
+
+##
+## Source more configuration(s)
+##
+
+# Source shared shell numbered config files
+for file in "$XDG_CONFIG_HOME"/shell/[0-9][0-9]_*.sh; do
+  [ -r "$file" ] && source "$file"
+done
+
+##
+## Tools
+##
+
+# Load direnv (if installed)
+if [ "$(command -v direnv)" ]; then
+  eval "$(direnv hook zsh)"
+fi
+
+# Load startship prompt (if installed)
+if [ "$(command -v starship)" ]; then
+  eval "$(starship init zsh)"
+fi

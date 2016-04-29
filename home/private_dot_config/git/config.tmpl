@@ -1,0 +1,80 @@
+[include]
+path = ~/.config/git/user
+
+[core]
+excludesfile = ~/.config/git/ignore
+autocrlf = input
+whitespace = trailing-space,space-before-tab
+pager = delta --diff-so-fancy
+
+[color]
+ui = true
+{{ if eq .chezmoi.os "linux" }}
+[credential]
+helper = store --file ~/.cache/git/secrets
+{{- end }}
+
+[diff]
+colorMoved = default
+
+[gc]
+auto = 1
+
+[init]
+defaultBranch = main
+
+[interactive]
+diffFilter = delta --color-only --features=interactive
+
+[merge]
+stat = true
+conflictstyle = diff3
+
+[pull]
+ff = only
+
+[push]
+followTags = true
+autoSetupRemote = true
+
+[alias]
+# Show all branches, including remotes
+b = branch -a
+# Diff
+d = diff HEAD --patch-with-stat --summary
+# Sync with remote
+f = fetch --all --prune
+p = pull --rebase --autostash --prune
+# Log: short, with patches, only last commit
+l = log --stat --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+la = log -p --stat --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+last = log -p --decorate=full --stat -1 HEAD
+# List all git files
+ls = ls-tree --full-tree -r --name-only HEAD
+# Switch: to default branch, to a branch (create if necessary)
+m = !git switch $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+sw = switch -C
+# Status
+s = status -sb
+# Undo
+undopush = push -f origin HEAD^:master
+
+[filter "lfs"]
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+required = true
+process = git-lfs filter-process
+
+[delta]
+true-color = always
+navigate = true
+side-by-side = true
+hunk-header-style = omit
+line-numbers-left-format = ""
+line-numbers-right-format = "│ "
+hyperlinks = true
+hyperlinks-file-link-format = "open://file/{path}:{line}"
+
+[delta "interactive"]
+keep-plus-minus-markers = false
+diffFilter = delta --color-only

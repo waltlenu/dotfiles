@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+# ZDOTDIR/.zprofile: executed by zsh(1):
+# Darwin: always
+# Linux: on login shells
+
+# If not running interactively, don't do anything else
+case $- in
+  *i*) ;;
+    *) return;;
+esac

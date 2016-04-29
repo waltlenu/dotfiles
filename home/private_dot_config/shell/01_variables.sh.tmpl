@@ -1,0 +1,88 @@
+#!/usr/bin/env sh
+# shellcheck disable=SC2034,SC2154
+
+###
+### Shared shell settings (bash/zsh): Environment Variables
+###
+
+##
+## XDG user directories
+## https://wiki.archlinux.org/index.php/XDG_user_directories
+##
+export XDG_DESKTOP_DIR="$HOME/Desktop"
+export XDG_DOCUMENTS_DIR="$HOME/Documents"
+export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+export XDG_MUSIC_DIR="$HOME/Music"
+export XDG_PICTURES_DIR="$HOME/Pictures"
+export XDG_PUBLICSHARE_DIR="$HOME/Public"
+export XDG_SOURCE_DIR="$HOME/src"
+export XDG_TEMP_DIR="$HOME/tmp"
+export XDG_VIDEOS_DIR="$HOME/Movies"
+
+##
+## Environment variables
+##
+
+# Set locale
+LANG='{{ .language }}_{{ .locale }}.{{ .encoding }}'
+LC_ALL='{{ .language }}_{{ .locale }}.{{ .encoding }}'
+
+# 256-color terminal
+TERM='{{ .term }}'
+COLORTERM='truecolor'
+
+# Editor
+EDITOR='nvim'
+
+# Pager
+PAGER='less'
+# Quit if only 1 screen, show colors, don't clear
+LESS='-FMnqrX' # Quit if only 1 screen, show colors, don't clear
+
+{{- if .proxy_address }}
+# Proxy
+export http_proxy="http://{{ .proxy_address }}:{{ .proxy_port }}"
+export https_proxy="https://{{ .proxy_address }}:{{ .proxy_port }}"
+export ftp_proxy="ftp://{{ .proxy_address }}:{{ .proxy_port }}"
+export rsync_proxy="rsync://{{ .proxy_address }}:{{ .proxy_port }}"
+export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+{{ end -}}
+
+##
+## Fixes for packages without proper builtin XDG support
+##
+
+# less
+export LESSKEY="${XDG_CACHE_HOME}/less/lesskey"
+export LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
+
+# GnuPG
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+# shellcheck disable=SC2155
+export GPG_TTY="$(tty)"
+
+# SSH agent
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+
+# wget
+export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
+
+# AWS CLI
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+
+# Docker
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export MACHINE_STORAGE_PATH="$XDG_DATA_HOME"/docker-machine
+
+# Xorg GTK
+export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
+
+# Vagrant
+export VAGRANT_HOME="$XDG_DATA_HOME"/vagrant
+export VAGRANT_ALIAS_FILE="$XDG_DATA_HOME"/vagrant/aliasesxport WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
+
+# Xorg URxvtd
+export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd

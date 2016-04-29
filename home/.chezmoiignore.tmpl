@@ -1,0 +1,31 @@
+# macOS
+{{ if ne .chezmoi.os "darwin" }}
+.chezmoiscripts/darwin/**
+.config/locale
+.config/homebrew
+.config/iterm2
+{{ end }}
+
+# Linux
+{{ if ne .chezmoi.os "linux" }}
+.chezmoiscripts/linux/**
+.pam_environment
+.config/fontconfig
+.config/foot
+.config/locale
+.config/mako
+.config/readline
+.config/sway
+.config/yay
+.config/waybar
+{{ end }}
+
+# Wayland
+{{ if eq .displayserver "wayland" }}
+.config/.xinitrc
+.config/.Xresources
+.config/dunst
+.config/i3
+.config/polybar
+.config/termite
+{{ end }}

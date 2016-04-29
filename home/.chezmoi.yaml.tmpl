@@ -1,0 +1,41 @@
+{{ $git_user_name := promptString "git_user_name" "Walter Lenuzza" -}}
+{{ $git_user_email := promptString "git_user_email" "waltlenu@users.noreply.github.com" -}}
+
+{{ $encoding := promptString "encoding" "UTF-8" -}}
+{{ $language := promptString "language" "en" -}}
+{{ $locale := promptString "locale" "GB" -}}
+
+{{ $term := promptString "term" "xterm-256color" -}}
+{{ $shell := promptString "shell" "zsh" -}}
+
+{{ $proxy_address := promptString "proxyaddress" "" -}}
+{{ $proxy_port := promptInt "proxyport" 3128 -}}
+
+{{ $displayserver := promptString "displayserver" "wayland" -}}
+{{ $font_family := promptString "font_family" "AnonymicePro Nerd Font" -}}
+{{ $font_size := promptInt "font_size" 9 -}}
+
+
+data:
+  # Git: user
+  git_user_name: {{ $git_user_name | quote }}
+  git_user_email: {{ $git_user_email | quote }}
+
+  # Locale
+  encoding: {{ $encoding | quote }}
+  language: {{ $language | quote }}
+  locale: {{ $locale | quote }}
+
+  # CLI
+  term: {{ $term | quote }}
+  shell: {{ $shell | quote }}
+
+  # Proxy
+  proxy_address: {{ $proxy_address | quote }}
+  proxy_port: {{ $proxy_port }}
+
+  # GUI
+  displayserver: {{ $displayserver | quote }}
+  font_family: {{ $font_family | quote }}
+  font_size: {{ $font_size }}
+
