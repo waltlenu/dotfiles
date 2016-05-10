@@ -11,6 +11,7 @@ function c() {
 }
 
 # Print a color test table
+# credit: https://github.com/mikker/dotfiles/blob/master/bin/colortest.sh
 function table_color_test() {
   local T='gYw'   # The test text
 
