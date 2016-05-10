@@ -32,7 +32,7 @@ function table_color_test() {
 }
 
 # Docker clean all unused containers/images
-docker_cleanup() {
+function docker_cleanup() {
   docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
   docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
 }
@@ -42,7 +42,7 @@ docker_cleanup() {
 # Note: .dmg/hdiutil is Mac OS X-specific.
 #
 # credit: http://nparikh.org/notes/zshrc.txt
-extract () {
+function extract () {
   if [ -f $1 ]; then
     case $1 in
       *.tar.bz2)  tar -jxvf $1                     ;;
@@ -79,7 +79,7 @@ function log() {
 }
 
 # Colorize 'man'
-man() {
+function man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
     LESS_TERMCAP_me=$'\E[0m' \
@@ -91,7 +91,7 @@ man() {
 }
 
 # Colorized $PATH
-path() {
+function path() {
   local blue="\033[1;34m"
   local green="\033[0;32m"
   local cyan="\033[0;36m"
