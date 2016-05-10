@@ -3,6 +3,7 @@ cask_args appdir: '/Applications'
 
 # Taps
 tap 'homebrew/completions'
+tap 'homebrew/versions'
 
 # Commandline tools
 brew 'ack'
@@ -41,7 +42,7 @@ brew 'vim'
 brew 'wget'
 
 # Shell autocomplete
-brew 'bash-completion'
+brew 'bash-completion2'
 brew 'brew-cask-completion'
 brew 'docker-completion'
 brew 'docker-compose-completion'
