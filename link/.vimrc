@@ -21,15 +21,17 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " My Bundles here:
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc!
+NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'tomasr/molokai'
 NeoBundle 'crusoexia/vim-monokai'
-NeoBundle 'bling/vim-airline'
-"NeoBundle 'edkolev/promptline.vim'
-"NeoBundle 'edkolev/tmuxline.vim'
+NeoBundle 'vim-airline/vim-airline-themes'
+NeoBundle 'edkolev/promptline.vim'
+NeoBundle 'edkolev/tmuxline.vim'
 
 
 call neobundle#end()
 
-" Required:
+"" Required:
 filetype plugin indent on
 
 " If there are uninstalled bundles found on startup,
