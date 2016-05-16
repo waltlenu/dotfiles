@@ -4,7 +4,7 @@ cask_args appdir: '/Applications'
 # Taps
 tap 'homebrew/completions'
 tap 'homebrew/versions'
-tap 'homebrew/fonts'
+tap 'caskroom/fonts'
 
 # Commandline tools
 brew 'ack'
@@ -108,6 +108,9 @@ cask 'torbrowser'
 cask 'transmission'
 cask 'vagrant'
 cask 'virtualbox'
+
+# Fonts (with Powerline)
+cask 'font-anonymous-pro-for-powerline'
 
 # Experimental
 brew 'avrdude'
