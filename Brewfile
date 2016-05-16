@@ -4,6 +4,7 @@ cask_args appdir: '/Applications'
 # Taps
 tap 'homebrew/completions'
 tap 'homebrew/versions'
+tap 'homebrew/fonts'
 
 # Commandline tools
 brew 'ack'
