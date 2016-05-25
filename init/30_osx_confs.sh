@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-
 # Thanks https://github.com/mathiasbynens/dotfiles/blob/master/.osx :)
+
+
+# OSX-only stuff. Abort if not OSX.
+is_osx || return 1
 
 
 # Menu bar: disable transparency
