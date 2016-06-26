@@ -5,6 +5,9 @@ function load_all_completions() {
   command -v brew >/dev/null 2>&1 || { 
     echo >&2 "Homebrew not found. Aborting BASH completion."; return 1; }
 
+  brew list bash-completion2 >/dev/null 2>&1 || {
+    echo >&2 "Homebrew bash-completion2 not found. Aborting BASH completion."; return 1; }
+
   local cpath="$(brew --prefix)/etc/bash_completion.d"
   local disabled="$cpath/git-prompt.sh $cpath/hg-completion.bash"
 

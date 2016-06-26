@@ -1,21 +1,9 @@
-[push]
-    default = simple
-[credential]
-    helper = osxkeychain
-[url "https://github.com/"]
-    insteadOf = git://github.com/
+[include]
+    path = ~/.gitconfig.local
 [core]
     excludesfile = ~/.gitignore_global
     autocrlf = input
     whitespace = trailing-space,space-before-tab
-[gc]
-    auto = 1
-[filter "lfs"]
-    clean = git lfs clean %f
-    smudge = git lfs smudge %f
-    required = true
-[color]
-    ui = true
 [alias]
     d = diff HEAD --patch-with-stat --summary
     follow = log -p --follow --
@@ -24,7 +12,19 @@
     s = status -sb
     undopush = push -f origin HEAD^:master
     unstage = reset HEAD --
+[color]
+    ui = true
 [diff]
     renames = copies
+[filter "lfs"]
+    clean = git lfs clean %f
+    smudge = git lfs smudge %f
+    required = true
+[gc]
+    auto = 1
 [merge]
     stat = true
+[push]
+    default = simple
+[url "https://github.com/"]
+    insteadOf = git://github.com/
