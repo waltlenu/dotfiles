@@ -12,6 +12,8 @@ if [[ ! "$(command -v brew)" ]]; then
 else
   e_header "Update Homebrew"
   brew update || { e_error "Homebrew update failed" && return 1; }
+  e_header "Update Homebrew Cask"
+  brew cask update || { e_error "Homebrew Cask update failed" && return 1; }
 fi
 
 # Tap Homebrew bundle to enable Brewfiles
@@ -19,7 +21,7 @@ e_header "Tap Homebrew bundle to enable Brewfiles"
 brew tap homebrew/bundle || { e_error "Homebrew bundle tap failed" && return 1; }
 
 # Upgrade all brews
-e_header 'Homebrew upgrade all'
+e_header 'Homebrew upgrade'
 brew upgrade || { e_error "Homebrew upgrade failed" && return 1; }
 
 # Install from Brewfile
@@ -35,33 +37,33 @@ echo; e_success "Homebrew up-to-date"; echo
 # Check Homebrew's status
 brew doctor || { echo; e_error "Homebrew doctor failed" && return 1; }
 
-#!/usr/bin/env bash
-
-(set -x; brew update;)
-(set -x; brew cask update;)
-
-(set -x; brew upgrade;)
-
-(set -x; brew cleanup;)
-(set -x; brew cask cleanup;)
-
-red=`tput setaf 1`
-green=`tput setaf 2`
-reset=`tput sgr0`
-
-casks=( $(brew cask list) )
-
-for cask in ${casks[@]}
-do
-    version=$(brew cask info $cask | sed -n "s/$cask:\ \(.*\)/\1/p")
-    installed=$(find "/usr/local/Caskroom/$cask" -type d -maxdepth 1 -maxdepth 1 -name "$version")
-
-    if [[ -z $installed ]]; then
-        echo "${red}${cask}${reset} requires ${red}update${reset}."
-        (set -x; brew cask uninstall $cask --force;)
-        (set -x; brew cask install $cask --force;)
-    else
-        echo "${red}${cask}${reset} is ${green}up-to-date${reset}."
-    fi
-done
+##!/usr/bin/env bash
+#
+#(set -x; brew update;)
+#(set -x; brew cask update;)
+#
+#(set -x; brew upgrade;)
+#
+#(set -x; brew cleanup;)
+#(set -x; brew cask cleanup;)
+#
+#red=`tput setaf 1`
+#green=`tput setaf 2`
+#reset=`tput sgr0`
+#
+#casks=( $(brew cask list) )
+#
+#for cask in ${casks[@]}
+#do
+#    version=$(brew cask info $cask | sed -n "s/$cask:\ \(.*\)/\1/p")
+#    installed=$(find "/usr/local/Caskroom/$cask" -type d -maxdepth 1 -maxdepth 1 -name "$version")
+#
+#    if [[ -z $installed ]]; then
+#        echo "${red}${cask}${reset} requires ${red}update${reset}."
+#        (set -x; brew cask uninstall $cask --force;)
+#        (set -x; brew cask install $cask --force;)
+#    else
+#        echo "${red}${cask}${reset} is ${green}up-to-date${reset}."
+#    fi
+#done
 
