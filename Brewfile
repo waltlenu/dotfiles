@@ -85,7 +85,7 @@ brew 'ruby-build'
 brew 's-lang'
 
 # Desktop apps
-# cask 'airmail-beta' # from Caskroom/versions/airmail-beta
+cask 'airmail-beta' # from Caskroom/versions/airmail-beta
 cask 'adium'
 cask 'atom'
 cask 'calibre'
@@ -99,13 +99,13 @@ cask 'firefox'
 cask 'flux'
 cask 'google-drive'
 cask 'gpgtools'
+cask 'github-desktop'
 cask 'iterm2'
 cask 'libreoffice'
 cask 'macdown'
 cask 'macpass'
 cask 'mplayerx'
 cask 'slack'
-cask 'sourcetree'
 cask 'spectacle'
 cask 'spotify'
 cask 'textmate'

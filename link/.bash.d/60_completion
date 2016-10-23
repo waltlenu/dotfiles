@@ -22,3 +22,6 @@ function load_all_completions() {
 }
 
 load_all_completions && unset load_all_completions
+
+# AWS complete
+complete -C aws_completer aws
