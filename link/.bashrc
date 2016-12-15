@@ -4,7 +4,7 @@
 # starting with two digits, unless they have a '.disabled' suffix
 function source_dotfiles() {
   if [ -d "$HOME"/.bash.d ]; then
-    GLOBIGNORE=*.disabled
+    GLOBIGNORE='*.disabled'
       for filename in "$HOME"/.bash.d/[0-9][0-9]_*; do
         [ -f "$filename" ] && source "$filename"
       done
