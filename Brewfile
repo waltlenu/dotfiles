@@ -90,6 +90,7 @@ cask 'chromium'
 cask 'cyberduck'
 cask 'dash'
 cask 'disk-inventory-x'
+cask 'docker'
 cask 'evernote'
 cask 'filebot'
 cask 'firefox'
@@ -113,7 +114,7 @@ cask 'vagrant'
 cask 'virtualbox'
 
 # Fonts (with Powerline)
-cask 'font-anonymous-pro-for-powerline'
+cask 'font-anonymice-powerline'
 
 # Experimental
 #brew 'avrdude'
