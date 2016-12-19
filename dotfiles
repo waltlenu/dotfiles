@@ -25,6 +25,7 @@ exit; fi
 ###########################################
 
 # Where the magic happens.
+export github_user='waltlenu'
 export DOTFILES=~/.dotfiles
 
 # Logging stuff.
