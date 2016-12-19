@@ -37,7 +37,7 @@ echo; e_success "Homebrew up-to-date"; echo
 # Check Homebrew's status
 brew doctor || { echo; e_error "Homebrew doctor failed" && return 1; }
 
-=======
+#=======
 ##!/usr/bin/env bash
 #
 #(set -x; brew update;)
