@@ -2,17 +2,21 @@
 [[ "$1" == "source" ]] || \
 
 echo 'Dotfiles - "Cowboy" Ben Alman - http://benalman.com/'
+echo 'modded by Walter Lenuzza - http://github.com/waltlenu'
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
 
 Usage: $(basename "$0")
 
-See the README for documentation.
+See the upstream README for documentation.
 https://github.com/cowboy/dotfiles
 
 Copyright (c) 2014 "Cowboy" Ben Alman
 Licensed under the MIT license.
 http://benalman.com/about/license/
+
+modded by Walter Lenuzza - http://github.com/waltlenu
+
 HELP
 exit; fi
 
@@ -21,6 +25,7 @@ exit; fi
 ###########################################
 
 # Where the magic happens.
+export github_user='waltlenu'
 export DOTFILES=~/.dotfiles
 
 # Logging stuff.
@@ -206,7 +211,7 @@ function copy_test() {
 }
 function copy_do() {
   e_success "Copying ~/$1."
-  cp "$2" ~/
+  cp -PR "$2" ~/
 }
 
 # Link files.
