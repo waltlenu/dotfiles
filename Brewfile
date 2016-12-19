@@ -84,7 +84,6 @@ brew 'ruby-build'
 brew 's-lang'
 
 # Desktop apps
-cask 'airmail-beta' # from Caskroom/versions/airmail-beta
 cask 'adium'
 cask 'atom'
 cask 'calibre'
@@ -101,7 +100,6 @@ cask 'github-desktop'
 cask 'google-drive'
 cask 'gpgtools'
 cask 'iterm2'
-cask 'keepassx'
 # cask 'libreoffice'
 cask 'macdown'
 cask 'macpass'
@@ -122,7 +120,6 @@ cask 'font-anonymice-powerline'
 
 # Experimental
 #brew 'avrdude'
-#brew 'awscli'
 #brew 'hugo'
 #brew 'irssi'
 #tap 'homebrew/games'
