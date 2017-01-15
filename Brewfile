@@ -117,6 +117,7 @@ cask 'virtualbox'
 
 # Fonts (with Powerline)
 cask 'font-anonymice-powerline'
+cask 'font-hack'
 
 # Experimental
 #brew 'avrdude'
