@@ -1,0 +1,14 @@
+# No shebang: this file is meant to be sourced
+
+# Check if commands exist
+commands_exist() {
+  for cmd in "$@"; do
+    command -v "$cmd" >/dev/null 2>&1 || return 1
+  done
+}
+
+# Speed up script by not using unicode
+disable_unicode() {
+  export LC_ALL=C
+  export LANG=C
+}

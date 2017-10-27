@@ -1,0 +1,35 @@
+# ~/.config/shell/rc: executed by bash(1)/zsh(1) shells.
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+#
+# Aliases
+#
+
+# List files
+alias   ls='ls --color=auto'
+alias    v='ls -lhA'
+alias   vs='ls -lhASr'
+alias   vt='ls -lhAtr'
+alias   vx='ls -lhAe@'
+alias tree='tree -aC -I .git --dirsfirst'
+
+# Visual Editor
+[ $(command -v vim) ] && alias vi='vim'
+[ $(command -v nvim) ] && alias vi='nvim'
+
+# Various
+alias     d='du -csh | sort -nk'
+alias    df='df -h'
+alias    ln='ln -v'
+alias mkdir='mkdir -p'
+alias    mv='mv -vi'
+alias    rm='rm -v'
+
+alias   mc='mc -a'
+alias tmux='tmux -2'
+

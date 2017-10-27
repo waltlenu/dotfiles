@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+
+# Be strict
+set -uo pipefail
+
+# Source common shell functions
+# shellcheck source=~/.config/shell/functions
+. ~/.config/shell/functions
+
+# Speed up script by not using unicode
+disable_unicode
+
+# Check prerequisites
+commands_exist shellcheck || {\
+  echo >&2 'ShellCheck not installed. Aborting!'
+  exit 1
+}
+
+# Script arguments list should not empty
+test -z "$@" && {\
+  echo >&2 'Specify at least 1 file to test. Aborting!'
+  exit 1
+}
+
+# Shells supported by ShellCheck
+dialects='sh bash dash ksh'
+
+# Main loop
+for shell in $dialects; do
+  echo "Running ShellCheck using $shell dialect..."
+  echo
+  shellcheck -x -s "$shell" -f gcc "$@"
+done

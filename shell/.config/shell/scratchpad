@@ -1,0 +1,12 @@
+# ~/.config/shell/scratchpad: executed by bash(1)/zsh(1) shells.
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+#
+# Scratchpad, temporary shell configurations
+#
+

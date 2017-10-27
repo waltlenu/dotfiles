@@ -1,0 +1,90 @@
+#!/usr/bin/env sh
+
+# Be strict
+set -euo pipefail
+
+# Source common shell functions
+# shellcheck source=~/.config/shell/functions
+. ~/.config/shell/functions
+
+# Speed up script by not using unicode
+disable_unicode
+
+# Check prerequisites
+commands_exist stow \
+  || { echo >&2 'GNU Stow not installed. Aborting!'; exit 1; }
+
+# Print out the help message
+help() {
+  printf "%s" "\
+Usage: dotfiles [-a|-p|-d|-h|-v|-help] [packages]
+
+where:
+    -a            apply [packages]
+    -p            plan [packages]
+    -d            destroy [packages]
+    -v            be verbose
+    -h, -help     show this help text
+
+environment variables:
+    DOTFILES_REPO         directory containing user dotfiles
+"
+exit 1
+}
+
+# Dotfiles repository
+DOTFILES_REPO="${DOTFILES_REPO:-$HOME/Devel/$USER/dotfiles}"
+
+test -d "$DOTFILES_REPO" \
+  || { echo >&2 "Directory $DOTFILES_REPO not found. Please create it or export the DOTFILES_REPO variable. Aborting!"; exit 1; }
+cd "$DOTFILES_REPO"
+
+
+  # getopts OPTSTRING starting with ':' for silent errors
+  OPTSTRING=':hva:p:d:'
+  OPTIND=1
+
+  while getopts "$OPTSTRING" OPT "$@"; do
+    case "$OPT" in
+
+      v )
+        echo 'verbose'
+        ;;
+
+      a )
+        echo 'apply'
+        ;;
+
+      p )
+        echo 'plan'
+        ;;
+
+      d )
+        echo 'destroy'
+        ;;
+
+      h|help )
+        help
+        ;;
+
+      \? )
+        echo "Invalid option: -$OPTARG";
+        echo; help
+        exit 1
+        ;;
+
+      : )
+        echo "Required argument for option not found: -$OPTARG";
+        echo; help
+        exit 1
+        ;;
+
+      * ) 
+        echo "Too many options (This should never be displayed)"
+        echo; help
+        exit 1
+        ;;
+
+    esac
+  done
+#stow --verbose=2 -t ~ -n shell

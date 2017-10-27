@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# ~/.config/bash/rc: executed by bash(1) shells.
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# Case-insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob;
+
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell;
+
+# History: file
+HISTFILE=~/.cache/bash/history
+
+# History: size
+HISTSIZE=8192
+
+# History: avoid duplicates
+HISTCONTROL=ignoredups:erasedups
+
+# History: ignore
+HISTIGNORE='&:ls:cd ~:cd ..:pwd:clear:[bf]g:exit:h:history'
+
+# History: timestamps for later analysis. www.debian-administration.org/users/rossen/weblog/1
+HISTTIMEFORMAT='%F %T '
+
+# History: when the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+
+# PS1: source external script
+[ -f ~/.config/bash/prompt ] && source ~/.config/bash/prompt
+
+# PS2: continuation interactive prompt
+PS2='  '
+
+# PS4: prefix tracing output (set -x)
+PS4='$0.$LINENO+ '
+
