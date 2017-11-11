@@ -1,0 +1,11 @@
+[Unit]
+Description=Simple X hotkey daemon
+PartOf=xsession.target
+
+[Service]
+ExecStartPre=/usr/bin/numlockx on
+ExecStart=/usr/bin/sxhkd -c %h/.config/sxhkd/sxhkdrc
+Restart=on-failure
+
+[Install]
+Alias=hotkeys.service
