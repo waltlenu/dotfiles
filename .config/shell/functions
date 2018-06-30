@@ -1,0 +1,25 @@
+# No shebang: this file is meant to be sourced
+
+# Check if commands exist
+commands_exist() {
+  for cmd in "$@"; do
+    command -v "$cmd" >/dev/null 2>&1 || return 1
+  done
+}
+
+# Speed up script by not using unicode
+disable_unicode() {
+  export LC_ALL=C
+  export LANG=C
+}
+
+# Alias dotfiles to git
+dotfiles() {
+  if [ -d "$DOTFILES_HOME" ]; then
+    git --git-dir="$DOTFILES_HOME" --work-tree="$HOME" "$@"
+  else
+    # shellcheck disable=SC2016
+    echo >&2 '$DOTFILES_HOME is not a valid directory. Aborting!'
+    return 1
+  fi
+}
