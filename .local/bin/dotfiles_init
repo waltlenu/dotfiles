@@ -1,17 +1,3 @@
-# dotfiles
-Accommodating idiosyncrasies
-
-Inspired by https://github.com/alfunx/.dotfiles
-
-
-## Setup Repository
-
-Setup a bare git repository in your home directory. Bare repositories have no
-working directory, so setup an alias to avoid typing the long command. Add the
-git directory `~/.dotfiles/` to the gitignore as a security measure. Setup
-remote and push. Hide untracked files when querying the status.
-
-```bash
 #!/usr/bin/env sh
 
 # Be strict
@@ -47,4 +33,3 @@ dotfiles checkout
 
 # Omit git untracked files
 dotfiles config --local status.showUntrackedFiles no
-```
