@@ -31,7 +31,7 @@ DOTFILES_GIT_BRANCH='refactor'
 
 # Create directory
 if ! [ -d "$DOTFILES_REPO_DIR" ]; then
-  mkdir -pv "$DOTFILES_REPO_DIR" || { \
+  mkdir -p "$DOTFILES_REPO_DIR" || { \
     echo >&2 'create directory failed. Aborting!'
     exit 1
   }
@@ -47,14 +47,19 @@ if ! $(/usr/bin/env git rev-parse --git-dir > /dev/null 2>&1); then
 fi
 cd -
 
-# Alias dotfiles to git
-alias dotfiles="/usr/bin/env git --git-dir="$DOTFILES_REPO_DIR" --work-tree="$HOME""
-
-# Configure repository: omit untracked files
-dotfiles config --local status.showUntrackedFiles no
+# Configure repository: omit untracked files and set origin
+/usr/bin/env git --git-dir="$DOTFILES_REPO_DIR" --work-tree="$HOME" config --local status.showUntrackedFiles no
+/usr/bin/env git --git-dir="$DOTFILES_REPO_DIR" --work-tree="$HOME" config --local remote.origin.fetch 'refs/heads/*:refs/heads/*'
 
 # Checkout branch
-dotfiles checkout
+/usr/bin/env git --git-dir="$DOTFILES_REPO_DIR" --work-tree="$HOME" checkout
 
 # Print all managed dotfiles
-dotfiles ls-tree --full-tree -r --name-only HEAD
+/usr/bin/env git --git-dir="$DOTFILES_REPO_DIR" --work-tree="$HOME" ls-tree --full-tree -r --name-only HEAD
+
+# Alias dotfiles to git
+echo 'Set this alias'
+alias dotfiles="/usr/bin/env git --git-dir="$DOTFILES_REPO_DIR" --work-tree="$HOME""
+
+# Print alias
+alias dotfiles
