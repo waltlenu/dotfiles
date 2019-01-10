@@ -12,7 +12,7 @@ shopt -s nocaseglob
 shopt -s cdspell
 
 # History: file
-HISTFILE="$HOME"/.cache/bash/history
+HISTFILE="$XDG_DATA_HOME"/bash/history
 
 # History: size
 HISTSIZE=4096
