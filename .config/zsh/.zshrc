@@ -10,6 +10,9 @@ esac
 
 [ -r "$HOME"/.config/shell/rc ] && source "$HOME"/.config/shell/rc
 
+# Set TERM
+TERM='xterm-color'
+
 HISTFILE="$XDG_DATA_HOME"/zsh/history
 HISTSIZE=4096
 SAVEHIST=4096
