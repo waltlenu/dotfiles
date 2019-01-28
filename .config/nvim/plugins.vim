@@ -11,6 +11,9 @@ let g:airline#extensions#tabline#enabled = 1
 " Path formatter
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
+" Show filename only in tabline
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 " Enable whitespace display
 let g:airline#extensions#whitespace#enabled = 1
 
@@ -30,6 +33,9 @@ let NERDTreeShowHidden=1
 
 " Hide help
 let NERDTreeMinimalUI = 1
+
+" Ignore files
+let NERDTreeIgnore = ['\.git$']
 
 " Close Vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif

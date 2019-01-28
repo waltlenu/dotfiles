@@ -46,32 +46,28 @@ if [ -x /usr/bin/dircolors ]; then
   eval "$(dircolors -b)"
 fi
 
-#alias dir='dir --color=auto'
-#alias vdir='vdir --color=auto'
-
+alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Aliases: list files
 if [ "$(command -v exa)" ]; then
-  alias ls='exa'
   alias  v='exa -a --git --long --header --time-style=long-iso'                    # Long listing
   alias vs='exa -a --git --long --header --time-style=long-iso --sort=size'        # Sort by size
   alias vt='exa -a --git --long --header --time-style=long-iso --sort=oldest'      # Sort by mtime-reversed
   alias vx='exa -a --git --long --header --time-style=long-iso --group --extended' # Show ACLs and xattrs
-
   alias tree='exa -a --ignore-glob=".git" --tree'
 else
-  alias ls='ls --color=auto'
   alias la='ls -A --color=auto'
   alias  v='ls -lhA'            # Long listing
   alias vs='ls -lhASr'          # Sort by size-reversed
   alias vt='ls -lhAtr'          # Sort by mtime-reversed
   alias vx='ls -lhAe@'          # Show ACLs and xattrs
-
   alias tree='tree -aC -I .git --dirsfirst'
 fi
 
