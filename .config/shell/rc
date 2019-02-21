@@ -31,8 +31,14 @@ export LC_ALL="en_US.UTF-8"
 # http_proxy="http://192.168.1.1:80"
 
 # Default programs
-PAGER='less'
-LESS='-FMnqrX'
+if [ "$(command -v most)" ]; then
+  PAGER='most'
+  alias less='most'
+else
+  PAGER='less'
+  LESS='-FMnqrX'
+fi
+
 EDITOR='vi'
 VISUAL='vi'
 BROWSER='firefox'
@@ -73,6 +79,10 @@ fi
 
 # Aliases: misc
 alias d='du -csh | sort -nk'
+
+# du -sch .[!.]* * |sort -h
+# ncdu
+
 alias df='df -h'
 alias ln='ln -v'
 alias mkdir='mkdir -p'

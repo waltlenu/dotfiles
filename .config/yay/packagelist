@@ -10,8 +10,10 @@ docker-compose
 docker-machine
 docker-machine-driver-kvm2
 dos2unix
+dunst
 ebtables
 exa
+feh
 firefox
 fortune-mod
 fortune-mod-it
@@ -23,6 +25,8 @@ google-chrome
 gvfs-smb
 htop
 httpie
+i3-gaps
+i3lock
 icdiff
 jq
 kubectl-bin
@@ -38,6 +42,7 @@ neofetch
 neovim
 nerd-fonts-complete
 networkmanager
+polybar
 pulseaudio
 qemu-arch-extra
 qemu-headless
@@ -48,6 +53,7 @@ slack-desktop
 sway-git
 swayidle-git
 swaylock-git
+sxiv
 terminus-font
 termite
 terraform
@@ -66,6 +72,13 @@ xorg
 xorg-xeyes
 xorg-xinit
 yay-bin
-polybar
-i3-gaps
-dunst
+xss-lock
+rsync
+w3m
+atool
+cpio
+ncdu
+visual-studio-code-bin
+pasystray
+pavucontrol
+paprefs
