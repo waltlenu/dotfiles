@@ -12,7 +12,7 @@ default_border pixel 2
 default_floating_border normal
 
 # Hide container borders adjacent to the screen edges
-#hide_edge_borders smart
+hide_edge_borders smart
 
 # Focus follows mouse
 focus_follows_mouse no
@@ -33,11 +33,13 @@ assign [class="Google-chrome"] $ws4
 
 ### Specific windows
 # set normal border for all Slack windows
-for_window [class="Slack"] border normal
+#for_window [class="Slack"] border normal
 # set normal border for all Firefox windows
-for_window [class="Firefox"] border normal
+#for_window [class="Firefox"] border normal
 # set normal border for all Firefox windows
-for_window [class="Google-chrome"] border normal
+#for_window [class="Google-chrome"] border normal
+# set normal border for all pavucontrol windows
+for_window [class="Pavucontrol"] border normal
 # enable floating mode for Volume Control
 for_window [class="Pavucontrol"] floating enable
 # print all window titles bold
