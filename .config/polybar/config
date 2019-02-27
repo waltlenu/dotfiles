@@ -117,17 +117,15 @@ module-margin-left = 0
 module-margin-right = 0
 
 ;https://github.com/jaagr/polybar/wiki/Fonts
-font-0 = "NotoSans Nerd Font:size=9:weight=bold;4"
+font-0 = "NotoSans Nerd Font:size=9:weight=Bold;4"
 
 modules-left = i3 arrow3 xwindow
 modules-center =
-;modules-right = arrow1 networkspeedup-eth networkspeeddown-eth networkspeedup-wlan networkspeeddown-wlan arrow2 filesystem arrow3 arrow2 ram arrow3 cpu2 arrow4 pavolume arrow5 arrow6 battery date
-modules-right = battery arrow1 fs arrow2 ram arrow1 cpu arrow2 date
+modules-right = battery arrow1 pavolume arrow2 net-speed-eth net-speed-wlan arrow1 fs arrow2 ram arrow1 cpu arrow2 date
 
 separator =
 
 ;dim-value = 1.0
-
 tray-position = right
 tray-detached = false
 tray-maxsize = 20
@@ -201,17 +199,17 @@ fuzzy-match = false
 ;http://fontawesome.io/cheatsheet
 ;                     
 
-ws-icon-1 = 1;
+ws-icon-0 = 10;
+ws-icon-1 = 1;
 ws-icon-2 = 2;
 ws-icon-3 = 3;
 ws-icon-4 = 4;
-ws-icon-5 = 5;
-ws-icon-6 = 6;
-ws-icon-7 = 7;
-ws-icon-8 = 8;
-ws-icon-9 = 9;
-ws-icon-0 = 10;
-ws-icon-default = 
+ws-icon-5 = 5;
+#ws-icon-6 = 6;
+#ws-icon-7 = 7;
+#ws-icon-8 = 8;
+#ws-icon-9 = 9;
+ws-icon-default = 
 
 ; Available tags:
 ;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
@@ -273,8 +271,8 @@ format-background = ${colors.background}
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
-###############################################################################
-############                       MODULES ARROWS                     ############
+################################################################################
+############                       MODULES ARROWS                   ############
 ################################################################################
 
 [module/arrow1]
@@ -418,8 +416,8 @@ format-foreground = ${colors.background}
 format-prefix = "  "
 format-prefix-foreground = ${colors.background}
 
-format = <label>
-label = %percentage:3%%
+format = <label>%
+label = %percentage:3%
 
 ################################################################################
 
@@ -429,15 +427,15 @@ type = internal/date
 ; Seconds to sleep between updates
 interval = 1.0
 
-label = %date%%time%
+label = %date% %time%
 
 ; time format
-time = %H:%M:%S
-date =
+time = %H:%M
+date = %a
 
 ; if `date-alt` or `time-alt` is defined, clicking
 ; the module will toggle between formats
-date-alt = "%A, %d %B %Y "
+date-alt = "%A, %d %B %Y"
 time-alt =  %H:%M:%S
 
 ################################################################################
@@ -506,6 +504,8 @@ format-prefix = "   "
 ;format-foreground = ${colors.foreground}
 ;format-background = #4B5665
 
+################################################################################
+
 [module/mpd]
 ;https://github.com/jaagr/polybar/wiki/Module:-mpd
 type = internal/mpd
@@ -531,55 +531,27 @@ format-online-background = ${colors.background}
 
 ################################################################################
 
-[module/networkspeedup-eth]
+[module/net-speed-eth]
 ;https://github.com/jaagr/polybar/wiki/Module:-network
 type = internal/network
 interface = eth0
-label-connected = "%upspeed:7%"
+label-connected = "%upspeed:7%  %downspeed:7%"
 format-connected = <label-connected>
-format-connected-prefix = " "
+format-connected-prefix = ""
 format-connected-prefix-foreground = ${colors.foreground}
-format-connected-foreground = ${colors.foreground}
-format-connected-background = #84598D
+format-connected-suffix = ""
 
 ################################################################################
 
-[module/networkspeeddown-eth]
-;https://github.com/jaagr/polybar/wiki/Module:-network
-type = internal/network
-interface = eth0
-label-connected = "%downspeed:7%"
-format-connected = <label-connected>
-format-connected-prefix = "  "
-format-connected-prefix-foreground = ${colors.foreground}
-format-connected-foreground = ${colors.foreground}
-format-connected-background = #84598D
-
-################################################################################
-
-[module/networkspeedup-wlan]
+[module/net-speed-wlan]
 ;https://github.com/jaagr/polybar/wiki/Module:-network
 type = internal/network
 interface = wlan0
-label-connected = "%upspeed:7%"
+label-connected = "%upspeed:7%  %downspeed:7%"
 format-connected = <label-connected>
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground}
-format-connected-foreground = ${colors.foreground}
-format-connected-background = #84598D
-
-################################################################################
-
-[module/networkspeeddown-wlan]
-;https://github.com/jaagr/polybar/wiki/Module:-network
-type = internal/network
-interface = wlan0
-label-connected = "%downspeed:7%"
-format-connected = <label-connected>
-format-connected-prefix = "  "
-format-connected-prefix-foreground = ${colors.foreground}
-format-connected-foreground = ${colors.foreground}
-format-connected-background = #84598D
+format-connected-suffix = "  "
 
 ################################################################################
 
@@ -592,46 +564,8 @@ click-right = exec pavucontrol
 click-left = ~/.config/polybar/scripts/pavolume.sh --togmute
 scroll-up = ~/.config/polybar/scripts/pavolume.sh --up
 scroll-down = ~/.config/polybar/scripts/pavolume.sh --down
-format-foreground = #d7d7d7
-format-background = #645377
-
-################################################################################
-
-[module/pub-ip]
-;https://linuxconfig.org/polybar-a-better-wm-panel-for-your-linux-system
-type = custom/script
-exec = ~/.config/polybar/scripts/pub-ip.sh
-interval = 100
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
-format-underline = #FFBB00
-label = %output%
-format-prefix = "  "
-format-prefix-foreground = #FFBB00
-
-################################################################################
-
-[module/release]
-type = custom/script
-exec = (lsb_release -d | awk {'print $2'} ;echo " "; lsb_release -r | awk {'print $2'}) | tr -d '\n'
-interval = 6000
-
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
-format-prefix = "  "
-format-prefix-foreground = #62FF00
-format-underline = #62FF00
-
-################################################################################
-
-[module/sep]
-; alternative separator
-type = custom/text
-content = 
-content-foreground = ${colors.foreground}
-content-background =  ${colors.background}
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
+format-background = ${colors.foreground}
+format-foreground = ${colors.background}
 
 ################################################################################
 
@@ -698,21 +632,6 @@ format-background = ${colors.background}
 format-underline = #C1B93E
 format-prefix-foreground = #C1B93E
 label =  %output:0:150:%
-
-################################################################################
-
-[module/uptime]
-;https://github.com/jaagr/polybar/wiki/User-contributed-modules#uptime
-type = custom/script
-exec = uptime | awk -F, '{sub(".*up ",x,$1);print $1}'
-interval = 100
-label = Uptime : %output%
-
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
-format-prefix = " "
-format-prefix-foreground = #C15D3E
-format-underline = #C15D3E
 
 ################################################################################
 

@@ -77,12 +77,16 @@ else
   alias tree='tree -aC -I .git --dirsfirst'
 fi
 
-# Aliases: misc
-alias d='du -csh | sort -nk'
-
+# Aliases: disk usage
+if [ "$(command -v ncdu)" ]; then
+  alias d='ncdu'
+else
+  alias d='du -csh | sort -nk'
+fi
 # du -sch .[!.]* * |sort -h
 # ncdu
 
+# Aliases: misc
 alias df='df -h'
 alias ln='ln -v'
 alias mkdir='mkdir -p'
@@ -97,6 +101,8 @@ alias clean_DS_Store='find . -name *.DS_Store -type f -print -delete'
 alias dotfiles='git --git-dir="$XDG_DATA_HOME"/dotfiles --work-tree="$HOME"'
 
 alias yay-install='yay -Sy --needed --noconfirm - < "$XDG_CONFIG_HOME"/yay/packagelist'
+alias yay-upgrade='yay -Syu --devel --timeupdate'
+
 alias vimrc='nvim ~/.config/nvim'
 
 # Replace 'ps fax' on MacOSX
