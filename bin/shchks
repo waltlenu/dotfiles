@@ -3,18 +3,15 @@
 # Be strict
 set -uo pipefail
 
-# Source common shell functions
-# shellcheck source=~/.config/shell/functions
-. ~/.config/shell/functions
-
 # Speed up script by not using unicode
-disable_unicode
+export LC_ALL=C
+export LANG=C
 
 # Check prerequisites
-commands_exist shellcheck || { \
+if ! [ "$(command -v shellcheck)" ]; then
   echo >&2 'ShellCheck not installed. Aborting!'
   exit 1
-}
+fi
 
 # Script arguments list should not empty
 test -z "$@" && { \
