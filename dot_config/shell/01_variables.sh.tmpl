@@ -1,0 +1,54 @@
+#!/usr/bin/env sh
+
+# Shared shell settings (bash/zsh)
+# Environment variables
+{{ if eq .chezmoi.os "darwin" }}
+# Colorize ls
+export CLICOLOR=1
+export CLICOLOR_FORCE=1 # Always show colors (with less and grep), Experimental
+{{ end -}}
+
+# Proxy
+
+# export http_proxy="http://192.168.1.1:8080"
+# export https_proxy="https://192.168.1.1:8080"
+# export ftp_proxy="ftp://192.168.1.1:8080"
+# export rsync_proxy="http://192.168.1.1:8080"
+# export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+
+# XDG user directories
+# https://wiki.archlinux.org/index.php/XDG_user_directories
+
+export XDG_DESKTOP_DIR="$HOME/Desktop"
+export XDG_DOCUMENTS_DIR="$HOME/Documents"
+export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+export XDG_MUSIC_DIR="$HOME/Music"
+export XDG_PICTURES_DIR="$HOME/Pictures"
+export XDG_PUBLICSHARE_DIR="$HOME/Public"
+export XDG_SOURCE_DIR="$HOME/src"
+export XDG_TEMP_DIR="$HOME/tmp"
+export XDG_VIDEOS_DIR="$HOME/Movies"
+
+## Fixes for packages without proper builtin XDG support
+
+# less
+test -d "$XDG_CACHE_HOME"/less || mkdir -p "$XDG_CACHE_HOME"/less
+export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+
+# GnuPG
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+# shellcheck disable=SC2155
+export GPG_TTY="$(tty)"
+
+# SSH agent
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# wget
+test -d "$XDG_CONFIG_HOME/wget" || mkdir -p "$XDG_CONFIG_HOME/wget"
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+
+# AWS CLI
+test -d "$XDG_CONFIG_HOME/aws" || mkdir -p "$XDG_CONFIG_HOME/aws"
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config

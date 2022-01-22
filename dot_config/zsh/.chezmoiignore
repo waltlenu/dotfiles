@@ -1,0 +1,9 @@
+# Plaform files
+platform.zsh_darwin
+platform.zsh_linux
+
+{{ if ne .chezmoi.os "darwin" }}
+executable_dot_iterm2_shell_integration.zsh
+{{ end }}
+{{ if ne .chezmoi.os "linux" }}
+{{ end }}

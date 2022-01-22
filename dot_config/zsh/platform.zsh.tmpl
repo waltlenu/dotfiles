@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+
+# ZDOTDIR/platform.zsh: executed by zsh(1)
+{{- if eq .chezmoi.os "darwin" }}
+{{   include "dot_config/zsh/platform.zsh_darwin" }}
+{{ end -}}
+{{- if eq .chezmoi.os "linux" }}
+{{   include "dot_config/zsh/platform.zsh_linux" }}
+{{ end -}}
+
+# Prefix PATH with local user binary directory
+test -d "$HOME/.local/bin" && export PATH="$HOME/.local/bin:$PATH"
+
+# Append Kubectl Krew plugins to PATH
+test -d "$HOME/.krew/bin" && export PATH="$PATH:$HOME/.krew/bin"
+
+# Load direnv (if installed)
+if [ "$(command -v direnv)" ]; then
+  eval "$(direnv hook zsh)"
+fi

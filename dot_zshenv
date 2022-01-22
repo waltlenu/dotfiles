@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+# ~/.zshenv: executed by zsh(1)
+# Used for setting user's environment variables
+# It should not contain commands that produce output or assume the shell is attached to a tty
+# This file will always be sourced
+
+# XDG base directories
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+
+# Set ZSH config directory
+test -d "$XDG_CONFIG_HOME"/zsh || mkdir -p "$XDG_CONFIG_HOME"/zsh
+export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
