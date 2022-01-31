@@ -3,11 +3,10 @@
 # Load iTerm2 ZSH script
 test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
 
-# Prefix PATH with HomeBrew binaries
-test -d '/opt/homebrew/bin' && export PATH="/opt/homebrew/bin:$PATH"
-#test -d '/opt/homebrew/opt/openssl@3/bin' && export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
-#test -d '/opt/homebrew/opt/curl/bin' && export PATH="/opt/homebrew/opt/curl/bin:$PATH"
-
 # Prefix PATH with MacPorts binaries
-test -d '/opt/local/bin' && export PATH="/opt/local/bin:$PATH"
 test -d '/opt/local/sbin' && export PATH="/opt/local/sbin:$PATH"
+test -d '/opt/local/bin' && export PATH="/opt/local/bin:$PATH"
+
+# Prefix PATH with HomeBrew binaries
+test -d '/opt/homebrew/sbin' && export PATH="/opt/homebrew/sbin:$PATH"
+test -d '/opt/homebrew/bin'  && export PATH="/opt/homebrew/bin:$PATH"
