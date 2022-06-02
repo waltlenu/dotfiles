@@ -10,3 +10,6 @@ test -d '/opt/local/bin' && export PATH="/opt/local/bin:$PATH"
 # Prefix PATH with HomeBrew binaries
 test -d '/opt/homebrew/sbin' && export PATH="/opt/homebrew/sbin:$PATH"
 test -d '/opt/homebrew/bin'  && export PATH="/opt/homebrew/bin:$PATH"
+
+# Prefix PATH with GNU coreutils
+test -d '/opt/homebrew/opt/coreutils/libexec/gnubin' && export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"

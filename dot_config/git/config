@@ -16,11 +16,14 @@ unstage = reset HEAD --
 [color]
 ui = true
 
+[commit]
+gpgsign = true
+
 [core]
 excludesfile = ~/.config/git/ignore
 autocrlf = input
 whitespace = trailing-space,space-before-tab
-editor = nvim
+editor = lvim
 pager = diff-so-fancy | less --tabs=4 -RFX
 
 [credential]
