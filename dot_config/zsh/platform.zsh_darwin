@@ -3,9 +3,13 @@
 # Load iTerm2 ZSH script
 test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
 
+# Prefix PATH with pnpm.io modules
+test -d "$HOME/.local/share/pnpm" && export PNPM_HOME="$HOME/.local/share/pnpm"
+test -d "$HOME/.local/share/pnpm" && export PATH="$PNPM_HOME:$PATH"
+
 # Prefix PATH with MacPorts binaries
 test -d '/opt/local/sbin' && export PATH="/opt/local/sbin:$PATH"
-test -d '/opt/local/bin' && export PATH="/opt/local/bin:$PATH"
+test -d '/opt/local/bin'  && export PATH="/opt/local/bin:$PATH"
 
 # Prefix PATH with HomeBrew binaries
 test -d '/opt/homebrew/sbin' && export PATH="/opt/homebrew/sbin:$PATH"

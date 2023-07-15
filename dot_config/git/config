@@ -1,78 +1,108 @@
 [include]
 path = ~/.config/git/user
 
-[alias]
-d = diff HEAD --patch-with-stat --summary
-follow = log -p --follow --
-l = log --stat --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-ll = log -p --stat --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-last = log --decorate=full --stat -1 HEAD
-ls = ls-tree --full-tree -r --name-only HEAD
-p = push origin HEAD:refs/for/master
-s = status -sb
-undopush = push -f origin HEAD^:master
-unstage = reset HEAD --
-
-[color]
-ui = true
-
-[commit]
-gpgsign = true
-
 [core]
 excludesfile = ~/.config/git/ignore
 autocrlf = input
 whitespace = trailing-space,space-before-tab
-editor = lvim
-pager = diff-so-fancy | less --tabs=4 -RFX
-
-[credential]
-helper = store --file ~/.cache/git/secrets
-
-[diff]
-renames = copies
-
-[filter "lfs"]
-clean = git-lfs clean -- %f
-smudge = git-lfs smudge -- %f
-required = true
-process = git-lfs filter-process
-
-[gc]
-auto = 1
-
-[http]
-sslVerify = false
+pager = delta --diff-so-fancy
 
 [init]
 defaultBranch = main
 
 [interactive]
-diffFilter = diff-so-fancy --patch
+diffFilter = delta --color-only --features=interactive
+
+[color]
+ui = true
+
+[diff]
+colorMoved = default
 
 [merge]
 stat = true
+conflictstyle = diff3
 
 [pull]
 ff = only
 
 [push]
-default = simple
+followTags = true
+autoSetupRemote = true
 
-[url "https://github.com"]
-insteadOf = git://github.com
+# [advice]
+# setUpstreamFailure = false
 
-[color "diff-highlight"]
-oldNormal = red bold
-oldHighlight = red bold 52
-newNormal = green bold
-newHighlight = green bold 22
+[alias]
+# Show all branches, including remotes
+b = branch -a
+# Diff
+d = diff HEAD --patch-with-stat --summary
+# Sync with remote
+f = fetch --all --prune
+p = pull --rebase --autostash --prune
+# Log: short, with patches, only last commit
+l = log --stat --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+la = log -p --stat --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+last = log -p --decorate=full --stat -1 HEAD
+# List all git files
+ls = ls-tree --full-tree -r --name-only HEAD
+# Switch: to default branch, to a branch (create if necessary)
+m = !git switch $(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+sw = switch -C
+# Status
+s = status -sb
+# Undo
+undopush = push -f origin HEAD^:master
 
-[color "diff"]
-meta = 11
-frag = magenta bold
-func = 146 bold
-commit = yellow bold
-old = red bold
-new = green bold
-whitespace = red reverse
+
+[delta]
+true-color = always
+navigate = true
+side-by-side = true
+hunk-header-style = omit
+line-numbers-left-format = ""
+line-numbers-right-format = "│ "
+hyperlinks = true
+# hyperlinks-file-link-format = "vscode://file/{path}:{line}"
+hyperlinks-file-link-format = "open://file/{path}:{line}"
+
+[delta "interactive"]
+keep-plus-minus-markers = false
+diffFilter = delta --color-only
+
+# [delta "decorations"]
+# commit-decoration-style = blue ol
+# commit-style = raw
+# file-style = omit
+# hunk-header-decoration-style = blue box
+# hunk-header-file-style = red
+# hunk-header-line-number-style = "#067a00"
+# hunk-header-style = file line-number syntax
+
+
+# [diff]
+# renames = copies
+
+# [filter "lfs"]
+# clean = git-lfs clean -- %f
+# smudge = git-lfs smudge -- %f
+# required = true
+# process = git-lfs filter-process
+
+# [gc]
+# auto = 1
+
+
+# [url "https://github.com"]
+# insteadOf = git://github.com
+
+
+# [color "diff"]
+# meta = 11
+# frag = magenta bold
+# func = 146 bold
+# commit = yellow bold
+# old = red bold
+# new = green bold
+# whitespace = red reverse

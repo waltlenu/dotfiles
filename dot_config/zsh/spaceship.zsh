@@ -3,19 +3,21 @@
 # ZSH spaceship prompt
 
 # If 'spaceship' theme is not installed
-prompt -l | grep -q spaceship
-(($? != 0)) && { return }
+#prompt -l | grep -q spaceship
+#(($? != 0)) && { return }
+
+source $(brew --prefix)/opt/spaceship/spaceship.zsh
 
 # Set ZSH 'spaceship' prompt theme
 # https://github.com/denysdovhan/spaceship-prompt
-prompt spaceship
+#prompt spaceship
 
 # Configure spaceship prompt
 SPACESHIP_PROMPT_ORDER=(
   dir           # Current directory section
   git           # Git section (git_branch + git_status)
-  vi_mode       # Vi-mode indicator
   jobs          # Background jobs indicator
+  exit_code     # Exit code section
   char          # Prompt character
 )
 SPACESHIP_RPROMPT_ORDER=(

@@ -7,3 +7,5 @@
 if [ "$(command -v motd)" ]; then
   motd
 fi
+
+export GPG_TTY=$(tty)

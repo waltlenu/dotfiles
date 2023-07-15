@@ -10,7 +10,6 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias dir='dir --color=auto'
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -50,9 +49,6 @@ alias rm='rm -v'
 alias mc='mc -a'
 alias tmux='tmux -2'
 alias top='htop'
-
-alias rg='ag'
-alias ack='ag'
 
 alias docker_nas='export DOCKER_HOST=tcp://192.168.1.254:2376 DOCKER_TLS_VERIFY=1'
 alias clean_DS_Store='find . -name *.DS_Store -type f -print -delete'
@@ -101,6 +97,14 @@ fi
 [ "$(command -v icdiff)" ] && {
   alias diff='icdiff'
 }
+
+# delta
+[ "$(command -v delta)" ] && {
+  alias diff='delta'
+}
+
+# Development
+alias git-bump='git-cliff | git tag -a $(semver bump patch `git describe --abbrev=0`) -F -'
 
 # Kubernetes
 alias h='helm'
