@@ -1,16 +1,7 @@
 #!/usr/bin/env zsh
 
 # ZSH spaceship prompt
-
-# If 'spaceship' theme is not installed
-#prompt -l | grep -q spaceship
-#(($? != 0)) && { return }
-
-source $(brew --prefix)/opt/spaceship/spaceship.zsh
-
-# Set ZSH 'spaceship' prompt theme
 # https://github.com/denysdovhan/spaceship-prompt
-#prompt spaceship
 
 # Configure spaceship prompt
 SPACESHIP_PROMPT_ORDER=(
@@ -39,9 +30,9 @@ SPACESHIP_DIR_TRUNC_REPO=false
 # Show Kubernetes section
 SPACESHIP_KUBECTL_SHOW=true
 SPACESHIP_KUBECTL_VERSION_SHOW=false
-SPACESHIP_KUBECONTEXT_SHOW=true
-SPACESHIP_KUBECONTEXT_SUFFIX=''
-SPACESHIP_KUBECONTEXT_COLOR=blue
+SPACESHIP_KUBECTL_CONTEXT_SHOW=true
+SPACESHIP_KUBECTL_CONTEXT_SUFFIX=''
+SPACESHIP_KUBECTL_CONTEXT_COLOR=blue
 
 # Prefix before execution time section
 SPACESHIP_EXEC_TIME_PREFIX='(took '
@@ -57,4 +48,3 @@ SPACESHIP_EXIT_CODE_SHOW=true
 
 # Character to be shown before exit code
 SPACESHIP_EXIT_CODE_SYMBOL='✘ '
-
