@@ -2,10 +2,10 @@
 
 # ZDOTDIR/platform.zsh: executed by zsh(1)
 {{- if eq .chezmoi.os "darwin" }}
-{{   include "dot_config/zsh/platform.zsh_darwin" }}
+{{   include "private_dot_config/zsh/platform.zsh_darwin" }}
 {{ end -}}
 {{- if eq .chezmoi.os "linux" }}
-{{   include "dot_config/zsh/platform.zsh_linux" }}
+{{   include "private_dot_config/zsh/platform.zsh_linux" }}
 {{ end -}}
 
 # Prefix PATH with local user binary directory

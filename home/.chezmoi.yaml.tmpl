@@ -1,0 +1,10 @@
+{{ $remote := promptBool "remote" false -}}
+{{ $email := promptString "email" -}}
+
+
+data:
+  # Wether the target is a remote host, thus only a minimal customization is required
+  remote: {{ $remote }}
+
+  # User e-mail address
+  email: {{ $email | quote }}
