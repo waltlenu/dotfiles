@@ -9,8 +9,7 @@ case $- in
 esac
 
 # Source BASH profile (~/.bash_profile)
-# shellcheck disable=SC2088
-[ -r '~/.bash_profile' ] && source '~/.bash_profile'
+[ -r ~/.bash_profile ] && source ~/.bash_profile
 
 # Checks the window size after each command and, if necessary,
 # updates the values of LINES and COLUMNS

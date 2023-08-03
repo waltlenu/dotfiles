@@ -1,24 +1,10 @@
 #!/usr/bin/env zsh
 
-# ZDOTDIR/.zshrc: executed by zsh(1)
-# Used for setting user's interactive shell configuration and executing commands,
-# will be read when starting as an interactive shell (spawned by a GUI terminal)
+# ZDOTDIR/.zshrc: executed by zsh(1) interactive shells
 
-#
-## Directories and paths
-#
-test -d "$XDG_CACHE_HOME"/zsh || mkdir -p "$XDG_CACHE_HOME"/zsh
-test -d "$XDG_DATA_HOME"/zsh || mkdir -p "$XDG_DATA_HOME"/zsh
-
-# Load ZSH platform-settings
-test -r "$ZDOTDIR/platform.zsh" && source "$ZDOTDIR/platform.zsh"
-{{ if eq .chezmoi.os "darwin" }}
-# ZSH function path
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-{{ end }}
-#
+##
 ## ZSH features and options
-#
+##
 
 setopt autocd nomatch notify
 unsetopt beep extendedglob
@@ -150,11 +136,52 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
-#
+##
 ## Source more configuration(s)
-#
+##
 
 # Source shared shell numbered config files
 for file in "$XDG_CONFIG_HOME"/shell/[0-9][0-9]_*.sh; do
-  [ -r "$file" ] && . "$file"
+  [ -r "$file" ] && source "$file"
 done
+
+{{ if eq .chezmoi.os "darwin" }}
+# Colorize ls
+export CLICOLOR=1
+export CLICOLOR_FORCE=1 # Always show colors (with less and grep), Experimental
+
+##
+## Load ZSH Darwin-specific settings
+##
+
+# ZSH function path
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+# Load iTerm2 ZSH script
+test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
+
+# Prefix PATH with MacPorts binaries
+test -d '/opt/local/sbin' && export PATH="/opt/local/sbin:$PATH"
+test -d '/opt/local/bin'  && export PATH="/opt/local/bin:$PATH"
+
+# Prefix PATH with HomeBrew binaries
+test -d '/opt/homebrew/sbin' && export PATH="/opt/homebrew/sbin:$PATH"
+test -d '/opt/homebrew/bin'  && export PATH="/opt/homebrew/bin:$PATH"
+
+# Prefix PATH with GNU coreutils
+test -d '/opt/homebrew/opt/coreutils/libexec/gnubin' && export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+{{ end -}}
+
+##
+## Tools
+##
+
+# Load direnv (if installed)
+if [ "$(command -v direnv)" ]; then
+  eval "$(direnv hook zsh)"
+fi
+
+# Load startship prompt (if installed)
+if [ "$(command -v starship)" ]; then
+  eval "$(starship init zsh)"
+fi

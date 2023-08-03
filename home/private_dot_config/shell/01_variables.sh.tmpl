@@ -22,16 +22,8 @@ export XDG_VIDEOS_DIR="$HOME/Movies"
 ##
 ## Environment variables
 ##
-{{ if eq .chezmoi.os "darwin" }}
-# Colorize ls
-export CLICOLOR=1
-export CLICOLOR_FORCE=1 # Always show colors (with less and grep), Experimental
-{{ end -}}
 
-##
-## Proxy
-##
-
+# Proxy
 # export http_proxy="http://192.168.1.1:8080"
 # export https_proxy="https://192.168.1.1:8080"
 # export ftp_proxy="ftp://192.168.1.1:8080"

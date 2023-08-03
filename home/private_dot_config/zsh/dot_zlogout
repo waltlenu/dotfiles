@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
 # ZDOTDIR/.zlogout: executed by zsh(1) login shells after their exit
-{{- if eq .chezmoi.os "linux" }}
 clear
 reset
-{{ end -}}

@@ -1,7 +1,0 @@
-# Linux-specific ZSH configuration
-
-# Prompt
-# If 'spaceship' theme is not installed
-autoload -Uz promptinit
-promptinit
-prompt spaceship

@@ -69,7 +69,7 @@ test -d "${XDG_DATA_HOME}/bash" || mkdir -p "${XDG_DATA_HOME}/bash"
 HISTFILE="${XDG_DATA_HOME}/bash/history"
 
 # Size
-HISTSIZE=32768
+HISTSIZE=1048576
 
 # Avoid duplicates
 HISTCONTROL=ignoredups:erasedups

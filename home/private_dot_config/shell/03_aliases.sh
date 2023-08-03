@@ -49,14 +49,10 @@ alias rm='rm -v'
 alias mc='mc -a'
 alias tmux='tmux -2'
 alias top='htop'
+alias ag='rg'
 
 alias clean_DS_Store='find . -name *.DS_Store -type f -print -delete'
 alias dotfiles='chezmoi'
-
-# Replace 'ps fax' on MacOSX
-if [ "$(uname)" = 'Darwin' ]; then
-  alias ps='pstree -U | grep -vE (/System/Library/|/usr/)'
-fi
 
 # Default programs
 if [ "$(command -v most)" ]; then
