@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 
-# Shared shell settings (bash/zsh)
+###
+### Shared shell settings (bash/zsh): aliases
+###
 
 #
 ## Colorize commands
@@ -10,8 +12,6 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 #
 ## List files
@@ -50,20 +50,13 @@ alias mc='mc -a'
 alias tmux='tmux -2'
 alias top='htop'
 
-alias docker_nas='export DOCKER_HOST=tcp://192.168.1.254:2376 DOCKER_TLS_VERIFY=1'
 alias clean_DS_Store='find . -name *.DS_Store -type f -print -delete'
-alias dotfiles='git --git-dir="$XDG_DATA_HOME"/dotfiles --work-tree="$HOME"'
-
-alias yay-install='yay -Sy --needed --noconfirm - < "$XDG_CONFIG_HOME"/yay/packagelist'
-alias yay-upgrade='yay -Syu --devel --timeupdate'
+alias dotfiles='chezmoi'
 
 # Replace 'ps fax' on MacOSX
 if [ "$(uname)" = 'Darwin' ]; then
   alias ps='pstree -U | grep -vE (/System/Library/|/usr/)'
 fi
-
-# Set default browser
-export BROWSER='firefox'
 
 # Default programs
 if [ "$(command -v most)" ]; then
@@ -86,25 +79,6 @@ fi
   export EDITOR='nvim'
   export VISUAL='nvim'
 }
-
-[ "$(command -v lvim)" ] && {
-  alias vi='lvim'
-  export EDITOR='lvim'
-  export VISUAL='lvim'
-}
-
-# Diff
-[ "$(command -v icdiff)" ] && {
-  alias diff='icdiff'
-}
-
-# delta
-[ "$(command -v delta)" ] && {
-  alias diff='delta'
-}
-
-# Development
-alias git-bump='git-cliff | git tag -a $(semver bump patch `git describe --abbrev=0`) -F -'
 
 # Kubernetes
 alias h='helm'
