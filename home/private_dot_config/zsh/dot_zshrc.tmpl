@@ -154,9 +154,6 @@ export CLICOLOR_FORCE=1 # Always show colors (with less and grep), Experimental
 ## Load ZSH Darwin-specific settings
 ##
 
-# ZSH function path
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
 # Load iTerm2 ZSH script
 test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
 
@@ -170,7 +167,10 @@ test -d '/opt/homebrew/bin'  && export PATH="/opt/homebrew/bin:$PATH"
 
 # Prefix PATH with GNU coreutils
 test -d '/opt/homebrew/opt/coreutils/libexec/gnubin' && export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-{{ end -}}
+
+# ZSH function path
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+{{ end }}
 
 ##
 ## Tools
