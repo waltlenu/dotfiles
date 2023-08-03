@@ -8,16 +8,29 @@ case $- in
     *) return;;
 esac
 
-# XDG base directories
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-'~/.cache'}"
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-'~/.config'}"
-export XDG_DATA_HOME="${XDG_DATA_HOME:-'~/.local/share'}"
+# Source BASH profile (~/.bash_profile)
+# shellcheck disable=SC2088
+[ -r '~/.bash_profile' ] && source '~/.bash_profile'
 
-# Source BASH login and non-login configuration
-[ -r "${XDG_CONFIG_HOME}/bash/login.sh" ] && source "${XDG_CONFIG_HOME}/bash/login.sh"
-[ -r "${XDG_CONFIG_HOME}/bash/non-login.sh" ] && source "${XDG_CONFIG_HOME}/bash/non-login.sh"
+# Checks the window size after each command and, if necessary,
+# updates the values of LINES and COLUMNS
+shopt -s checkwinsize
 
-# Source shared numbered config files
-for file in "${XDG_CONFIG_HOME}/shell/"[0-9][0-9]_*.sh; do
-  [ -r "$file" ] && source "$file"
-done
+# Set TERM variables
+TERM='xterm-256color'
+# shellcheck disable=SC2034
+COLORTERM='truecolor'
+
+##
+## Tools
+##
+
+# Load direnv (if installed)
+if [ "$(command -v direnv)" ]; then
+  eval "$(direnv hook bash)"
+fi
+
+# Load startship prompt (if installed)
+if [ "$(command -v starship)" ]; then
+  eval "$(starship init bash)"
+fi
