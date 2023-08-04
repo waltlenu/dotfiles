@@ -1,5 +1,6 @@
 # Dotfiles
 
+Accommodating idiosyncrasies
 
 ### Install script
 

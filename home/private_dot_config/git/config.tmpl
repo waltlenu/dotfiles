@@ -9,6 +9,10 @@ pager = delta --diff-so-fancy
 
 [color]
 ui = true
+{{ if eq .chezmoi.os "linux" }}
+[credential]
+helper = store --file ~/.cache/git/secrets
+{{- end }}
 
 [diff]
 colorMoved = default
