@@ -66,10 +66,7 @@ title() {
   echo -ne "\\033]0;$title\\007"
 }
 
-# Weather (defaults to London, EU)
-# $1: city
+# Weather (defaults to London, UK)
 weather() {
-  local city=$1
-  : ${city:='London'}
-  command -v curl >/dev/null 2>&- && curl --silent http://wttr.in/$city
+  command -v curl >/dev/null 2>&- && curl --silent http://wttr.in/London
 }

@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# shellcheck disable=SC2034,SC2154
 
 ###
 ### Shared shell settings (bash/zsh): Environment Variables
@@ -8,7 +9,6 @@
 ## XDG user directories
 ## https://wiki.archlinux.org/index.php/XDG_user_directories
 ##
-
 export XDG_DESKTOP_DIR="$HOME/Desktop"
 export XDG_DOCUMENTS_DIR="$HOME/Documents"
 export XDG_DOWNLOAD_DIR="$HOME/Downloads"
@@ -23,34 +23,66 @@ export XDG_VIDEOS_DIR="$HOME/Movies"
 ## Environment variables
 ##
 
+# Set locale
+LANG='{{ .language }}_{{ .locale }}.{{ .encoding }}'
+LC_ALL='{{ .language }}_{{ .locale }}.{{ .encoding }}'
+
+# 256-color terminal
+TERM='{{ .term }}'
+COLORTERM='truecolor'
+
+# Editor
+EDITOR='nvim'
+
+# Pager
+PAGER='less'
+# Quit if only 1 screen, show colors, don't clear
+LESS='-FMnqrX' # Quit if only 1 screen, show colors, don't clear
+
+{{- if .proxy_address }}
 # Proxy
-# export http_proxy="http://192.168.1.1:8080"
-# export https_proxy="https://192.168.1.1:8080"
-# export ftp_proxy="ftp://192.168.1.1:8080"
-# export rsync_proxy="http://192.168.1.1:8080"
-# export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+export http_proxy="http://{{ .proxy_address }}:{{ .proxy_port }}"
+export https_proxy="https://{{ .proxy_address }}:{{ .proxy_port }}"
+export ftp_proxy="ftp://{{ .proxy_address }}:{{ .proxy_port }}"
+export rsync_proxy="rsync://{{ .proxy_address }}:{{ .proxy_port }}"
+export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+{{ end -}}
 
 ##
 ## Fixes for packages without proper builtin XDG support
 ##
 
 # less
-# shellcheck disable=SC2154
-test -d "${XDG_CACHE_HOME}/less" || mkdir -p "${XDG_CACHE_HOME}/less"
 export LESSKEY="${XDG_CACHE_HOME}/less/lesskey"
 export LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # GnuPG
-# shellcheck disable=SC2154
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 # shellcheck disable=SC2155
 export GPG_TTY="$(tty)"
 
 # SSH agent
-# shellcheck disable=SC2154
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
 # wget
-# shellcheck disable=SC2154
-test -d "${XDG_CONFIG_HOME}/wget" || mkdir -p "${XDG_CONFIG_HOME}/wget"
 export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
+
+# AWS CLI
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+
+# Docker
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export MACHINE_STORAGE_PATH="$XDG_DATA_HOME"/docker-machine
+
+# Xorg GTK
+export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
+
+# Vagrant
+export VAGRANT_HOME="$XDG_DATA_HOME"/vagrant
+export VAGRANT_ALIAS_FILE="$XDG_DATA_HOME"/vagrant/aliasesxport WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
+
+# Xorg URxvtd
+export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd

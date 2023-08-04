@@ -1,6 +1,7 @@
 # macOS
 {{ if ne .chezmoi.os "darwin" }}
 .chezmoiscripts/darwin/**
+.config/locale
 .config/homebrew
 .config/iterm2
 {{ end }}
@@ -13,4 +14,19 @@
 .config/readline
 .config/sway
 .config/waybar
+{{ end }}
+
+# Linux: Arch
+{{ if ne .chezmoi.osRelease.id "arch" }}
+.config/yay
+{{ end }}
+
+# Wayland
+{{ if eq .displayserver "wayland" }}
+.config/.xinitrc
+.config/.Xresources
+.config/dunst
+.config/i3
+.config/polybar
+.config/termite
 {{ end }}
