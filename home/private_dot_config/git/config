@@ -7,17 +7,20 @@ autocrlf = input
 whitespace = trailing-space,space-before-tab
 pager = delta --diff-so-fancy
 
-[init]
-defaultBranch = main
-
-[interactive]
-diffFilter = delta --color-only --features=interactive
-
 [color]
 ui = true
 
 [diff]
 colorMoved = default
+
+[gc]
+auto = 1
+
+[init]
+defaultBranch = main
+
+[interactive]
+diffFilter = delta --color-only --features=interactive
 
 [merge]
 stat = true
@@ -29,9 +32,6 @@ ff = only
 [push]
 followTags = true
 autoSetupRemote = true
-
-# [advice]
-# setUpstreamFailure = false
 
 [alias]
 # Show all branches, including remotes
@@ -55,6 +55,11 @@ s = status -sb
 # Undo
 undopush = push -f origin HEAD^:master
 
+[filter "lfs"]
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+required = true
+process = git-lfs filter-process
 
 [delta]
 true-color = always
@@ -64,45 +69,8 @@ hunk-header-style = omit
 line-numbers-left-format = ""
 line-numbers-right-format = "│ "
 hyperlinks = true
-# hyperlinks-file-link-format = "vscode://file/{path}:{line}"
 hyperlinks-file-link-format = "open://file/{path}:{line}"
 
 [delta "interactive"]
 keep-plus-minus-markers = false
 diffFilter = delta --color-only
-
-# [delta "decorations"]
-# commit-decoration-style = blue ol
-# commit-style = raw
-# file-style = omit
-# hunk-header-decoration-style = blue box
-# hunk-header-file-style = red
-# hunk-header-line-number-style = "#067a00"
-# hunk-header-style = file line-number syntax
-
-
-# [diff]
-# renames = copies
-
-# [filter "lfs"]
-# clean = git-lfs clean -- %f
-# smudge = git-lfs smudge -- %f
-# required = true
-# process = git-lfs filter-process
-
-# [gc]
-# auto = 1
-
-
-# [url "https://github.com"]
-# insteadOf = git://github.com
-
-
-# [color "diff"]
-# meta = 11
-# frag = magenta bold
-# func = 146 bold
-# commit = yellow bold
-# old = red bold
-# new = green bold
-# whitespace = red reverse
