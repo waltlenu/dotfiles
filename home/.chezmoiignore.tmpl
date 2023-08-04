@@ -1,8 +1,13 @@
+# macOS
 {{ if ne .chezmoi.os "darwin" }}
+.chezmoiscripts/darwin/**
 .config/homebrew
 .config/iterm2
 {{ end }}
+
+# Linux
 {{ if ne .chezmoi.os "linux" }}
+.chezmoiscripts/linux/**
 .config/foot
 .config/readline
 .config/sway
