@@ -1,10 +1,8 @@
-{{ $remote := promptBool "remote" false -}}
-{{ $email := promptString "email" -}}
-
+{{ $git_user_name := promptString "git_user_name" "Walter Lenuzza" -}}
+{{ $git_user_email := promptString "git_user_email" "waltlenu@users.noreply.github.com" -}}
 
 data:
-  # Wether the target is a remote host, thus only a minimal customization is required
-  remote: {{ $remote }}
-
-  # User e-mail address
-  email: {{ $email | quote }}
+  # Git User name
+  git_user_name: {{ $git_user_name | quote }}
+  # Git User e-mail address
+  git_user_email: {{ $git_user_email | quote }}
