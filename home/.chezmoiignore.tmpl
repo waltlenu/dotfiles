@@ -10,15 +10,14 @@
 {{ if ne .chezmoi.os "linux" }}
 .chezmoiscripts/linux/**
 .pam_environment
+.config/fontconfig
 .config/foot
+.config/locale
+.config/mako
 .config/readline
 .config/sway
-.config/waybar
-{{ end }}
-
-# Linux: Arch
-{{ if ne .chezmoi.osRelease.id "arch" }}
 .config/yay
+.config/waybar
 {{ end }}
 
 # Wayland
