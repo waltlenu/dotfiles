@@ -46,6 +46,24 @@ shopt -s cdspell
 ## Bash completion
 ##
 
+{{- if eq .chezmoi.os "darwin" }}
+if type brew &>/dev/null; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+    done
+  fi
+fi
+
+##
+## iTerm2 integration
+##
+test -e "${XDG_CONFIG_HOME]/iterm2/iterm2_shell_integration.bash" && source "${XDG_CONFIG_HOME}/iterm2/iterm2_shell_integration.bash"
+{{- end }}
+{{- if eq .chezmoi.os "linux" }}
 test -d "${XDG_CONFIG_HOME}/bash-completion" || mkdir -p "${XDG_CONFIG_HOME}/bash-completion"
 export BASH_COMPLETION_USER_FILE="${XDG_CONFIG_HOME}/bash-completion/bash_completion"
 
@@ -59,6 +77,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+{{- end }}
 
 ##
 ## History
