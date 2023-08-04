@@ -136,15 +136,6 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
-##
-## Source more configuration(s)
-##
-
-# Source shared shell numbered config files
-for file in "$XDG_CONFIG_HOME"/shell/[0-9][0-9]_*.sh; do
-  [ -r "$file" ] && source "$file"
-done
-
 {{ if eq .chezmoi.os "darwin" }}
 ##
 ## Load ZSH Darwin-specific settings
@@ -155,7 +146,7 @@ export CLICOLOR=1
 export CLICOLOR_FORCE=1 # Always show colors (with less and grep), Experimental
 
 # Load iTerm2 ZSH script
-test -e "${XDG_CONFIG_HOME]/iterm2/iterm2_shell_integration.zsh" && source "${XDG_CONFIG_HOME}/iterm2/iterm2_shell_integration.zsh"
+test -e "$XDG_CONFIG_HOME/iterm2/iterm2_shell_integration.zsh" && source "$XDG_CONFIG_HOME/iterm2/iterm2_shell_integration.zsh"
 
 # Prefix PATH with MacPorts binaries
 test -d '/opt/local/sbin' && export PATH="/opt/local/sbin:$PATH"
@@ -171,6 +162,15 @@ test -d '/opt/homebrew/opt/coreutils/libexec/gnubin' && export PATH="/opt/homebr
 # ZSH function path
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 {{ end }}
+
+##
+## Source more configuration(s)
+##
+
+# Source shared shell numbered config files
+for file in "$XDG_CONFIG_HOME"/shell/[0-9][0-9]_*.sh; do
+  [ -r "$file" ] && source "$file"
+done
 
 ##
 ## Tools
