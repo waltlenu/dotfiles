@@ -12,7 +12,7 @@ $kubernetes
 # Current working directory
 [directory]
 truncation_length = 2
-home_symbol = '🏠 '
+home_symbol = ' '
 
 ##
 ## Toggle modules

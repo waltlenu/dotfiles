@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-  font-family: NotoSans Nerd Font;
+  font-family: sans;
   font-size: 12px;
   font-weight: bold;
   color: #928374;
@@ -18,7 +18,7 @@ window#waybar {
 tooltip {
   border: 2;
   border-radius: 2;
-  font-family: NotoSans Nerd Font;
+  font-family: sans;
   font-size: 12px;
   font-weight: bold;
   color: #928374;

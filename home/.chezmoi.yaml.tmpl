@@ -8,10 +8,13 @@
 {{ $term := promptString "term" "xterm-256color" -}}
 {{ $shell := promptString "shell" "zsh" -}}
 
-{{ $displayserver := promptString "displayserver" "wayland" -}}
-
 {{ $proxy_address := promptString "proxyaddress" "" -}}
-{{ $proxy_port := promptString "proxyport" "3128" -}}
+{{ $proxy_port := promptInt "proxyport" 3128 -}}
+
+{{ $displayserver := promptString "displayserver" "wayland" -}}
+{{ $font_family := promptString "font_family" "AnonymicePro Nerd Font" -}}
+{{ $font_size := promptInt "font_size" 9 -}}
+
 
 data:
   # Git: user
@@ -27,9 +30,12 @@ data:
   term: {{ $term | quote }}
   shell: {{ $shell | quote }}
 
-  # GUI
-  displayserver: {{ $displayserver | quote }}
-
   # Proxy
   proxy_address: {{ $proxy_address | quote }}
-  proxy_port: {{ $proxy_port | quote }}
+  proxy_port: {{ $proxy_port }}
+
+  # GUI
+  displayserver: {{ $displayserver | quote }}
+  font_family: {{ $font_family | quote }}
+  font_size: {{ $font_size }}
+

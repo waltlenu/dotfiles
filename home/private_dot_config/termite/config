@@ -1,6 +1,6 @@
 [options]
 # Fonts
-font = Anonymice Nerd Font 9
+font = monospace 9
 
 scroll_on_output = false
 scroll_on_keystroke = true
