@@ -225,7 +225,6 @@ client.background       #ffffff
 ### Status Bar
 bar {
     swaybar_command waybar
-    # swaybar_command i3status-rs /home/waltlenu/.config/i3status-rust/config.toml
 }
 
 # Dont idle on windows that are full screen
