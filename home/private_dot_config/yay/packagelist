@@ -24,7 +24,7 @@ docker-machine-driver-kvm2
 dos2unix
 dunst
 ebtables
-exa
+eza
 f2fs-tools
 fakeroot
 feh
