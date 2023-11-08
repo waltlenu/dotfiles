@@ -12,16 +12,14 @@ $kubernetes
 # Current working directory
 [directory]
 truncation_length = 2
-home_symbol = ' '
-
-##
-## Toggle modules
-##
+home_symbol = '🏠 '
 
 # Kubernetes config, context, namespace
 [kubernetes]
 disabled = false
 format = '[$symbol$context( \($namespace\))]($style)'
+
+## Toggle modules
 
 # Insert a line break, making the prompt single line
 [line_break]
