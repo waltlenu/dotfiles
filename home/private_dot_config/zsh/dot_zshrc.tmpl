@@ -148,6 +148,11 @@ export CLICOLOR_FORCE=1 # Always show colors (with less and grep), Experimental
 # Load iTerm2 ZSH script
 test -e "$XDG_CONFIG_HOME/iterm2/iterm2_shell_integration.zsh" && source "$XDG_CONFIG_HOME/iterm2/iterm2_shell_integration.zsh"
 
+# Load Ghostty shell integration
+if [ -n "${GHOSTTY_RESOURCES_DIR}" ]; then
+    builtin source "${GHOSTTY_RESOURCES_DIR}/shell-integration/zsh/ghostty-integration"
+fi
+
 # Prefix PATH with MacPorts binaries
 test -d '/opt/local/sbin' && export PATH="/opt/local/sbin:$PATH"
 test -d '/opt/local/bin'  && export PATH="/opt/local/bin:$PATH"

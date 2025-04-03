@@ -79,3 +79,6 @@ fi
 # Kubernetes
 alias h='helm'
 alias k='kubectl'
+
+# Terragrunt
+export TERRAGRUNT_TFPATH=$(which terraform)

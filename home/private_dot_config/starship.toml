@@ -12,7 +12,7 @@ $kubernetes
 # Current working directory
 [directory]
 truncation_length = 2
-home_symbol = '🏠 '
+home_symbol = '🏠'
 
 # Kubernetes config, context, namespace
 [kubernetes]
@@ -27,6 +27,9 @@ disabled = true
 
 # Not very helpful information
 [aws]
+disabled = true
+
+[gcloud]
 disabled = true
 
 [helm]
