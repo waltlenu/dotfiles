@@ -1,5 +1,6 @@
-{{ $git_user_name := promptString "git_user_name" "Walter Lenuzza" -}}
-{{ $git_user_email := promptString "git_user_email" "waltlenu@users.noreply.github.com" -}}
+{{ $git_user_name := promptString "git_user_name" -}}
+{{ $git_user_email := promptString "git_user_email" -}}
+{{ $git_user_signingkey := promptString "git_user_signingkey" -}}
 
 {{ $encoding := promptString "encoding" "UTF-8" -}}
 {{ $language := promptString "language" "en" -}}
@@ -20,6 +21,7 @@ data:
   # Git: user
   git_user_name: {{ $git_user_name | quote }}
   git_user_email: {{ $git_user_email | quote }}
+  git_user_signingkey: {{ $git_user_signingkey | quote }}
 
   # Locale
   encoding: {{ $encoding | quote }}
@@ -38,4 +40,3 @@ data:
   displayserver: {{ $displayserver | quote }}
   font_family: {{ $font_family | quote }}
   font_size: {{ $font_size }}
-
